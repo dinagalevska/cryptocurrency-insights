@@ -1,0 +1,1 @@
+{"operation": "create", "resource": {"type": "pipeline", "uuid": "get_data_from_bucket_to_bigquery"}, "timestamp": 1729239403, "user": null}

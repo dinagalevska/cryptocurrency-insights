@@ -1,0 +1,1 @@
+{"exchangeId": "str", "rank": "str", "baseSymbol": "str", "baseId": "str", "quoteSymbol": "str", "quoteId": "str", "priceQuote": "str", "priceUsd": "str", "volumeUsd24Hr": "str", "percentExchangeVolume": "str", "tradesCount24Hr": "str", "updated": "int64", "flag": "str", "timestamp": "datetime64[ns]"}

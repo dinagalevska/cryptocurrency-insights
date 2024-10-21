@@ -1,0 +1,1 @@
+{"exchangeId": "str", "name": "str", "rank": "str", "percentTotalVolume": "str", "volumeUsd": "str", "tradingPairs": "str", "socket": "str", "exchangeUrl": "str", "updated": "int64", "flag": "str"}

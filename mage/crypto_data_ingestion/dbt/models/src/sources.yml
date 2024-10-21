@@ -1,0 +1,12 @@
+version: 2
+
+sources:
+  - name: staging
+    database: cryptomarketdashboard  # Your BigQuery project ID
+    schema: cryptocurrency_insights  # Your BigQuery dataset
+
+    tables:
+      - name: exchanges
+      - name: historical_assets
+      - name: market
+      - name: rates

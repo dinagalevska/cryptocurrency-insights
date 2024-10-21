@@ -1,0 +1,17 @@
+name: 'CryptoMarketDashboard'  # Replace with a name for your project
+version: '1.0'
+config-version: 2
+
+profile: 'CryptoMarketDashboard'  # This should match the name in your profiles.yml
+
+source-paths: ["models"]  
+analysis-paths: ["analysis"]  
+test-paths: ["tests"]  
+data-paths: ["data"]  
+macro-paths: ["macros"]  
+snapshot-paths: ["snapshots"]  
+
+target-path: "target"  # Directory where compiled SQL will be written
+clean-targets:
+  - "target"
+  - "dbt_modules"

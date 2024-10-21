@@ -1,0 +1,14 @@
+# https://docs.getdbt.com/docs/core/connect-data-platform/profiles.yml
+
+# profiles.yml
+CryptoMarketDashboard:  
+  outputs:
+    dev:
+      type: bigquery
+      method: service-account
+      project: cryptomarketdashboard 
+      dataset: cryptocurrency_insights  
+      keyfile: /home/src/keys/service-account-key.json
+      threads: 1
+      timeout_seconds: 300
+  target: dev

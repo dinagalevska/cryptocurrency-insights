@@ -1,0 +1,298 @@
+blocks:
+- all_upstream_blocks_executed: true
+  color: null
+  configuration: {}
+  downstream_blocks:
+  - add_flag_for_rates
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: load_rates_from_bucket
+  retry_config: null
+  status: executed
+  timeout: null
+  type: data_loader
+  upstream_blocks: []
+  uuid: load_rates_from_bucket
+- all_upstream_blocks_executed: true
+  color: null
+  configuration: {}
+  downstream_blocks:
+  - add_flag_for_market
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: load_market_from_bucket
+  retry_config: null
+  status: executed
+  timeout: null
+  type: data_loader
+  upstream_blocks: []
+  uuid: load_market_from_bucket
+- all_upstream_blocks_executed: true
+  color: null
+  configuration: {}
+  downstream_blocks:
+  - updated_to_timestamp_market
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: add_flag_for_market
+  retry_config: null
+  status: executed
+  timeout: null
+  type: transformer
+  upstream_blocks:
+  - load_market_from_bucket
+  uuid: add_flag_for_market
+- all_upstream_blocks_executed: true
+  color: null
+  configuration: {}
+  downstream_blocks:
+  - add_flag_for_exchange
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: load_exchange_from_bucket
+  retry_config: null
+  status: executed
+  timeout: null
+  type: data_loader
+  upstream_blocks: []
+  uuid: load_exchange_from_bucket
+- all_upstream_blocks_executed: true
+  color: null
+  configuration: {}
+  downstream_blocks:
+  - updated_to_timestamp_exchange
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: add_flag_for_exchange
+  retry_config: null
+  status: executed
+  timeout: null
+  type: transformer
+  upstream_blocks:
+  - load_exchange_from_bucket
+  uuid: add_flag_for_exchange
+- all_upstream_blocks_executed: true
+  color: null
+  configuration: {}
+  downstream_blocks:
+  - export_exchange_data_to_bq
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: updated_to_timestamp_exchange
+  retry_config: null
+  status: executed
+  timeout: null
+  type: transformer
+  upstream_blocks:
+  - add_flag_for_exchange
+  uuid: updated_to_timestamp_exchange
+- all_upstream_blocks_executed: true
+  color: null
+  configuration: {}
+  downstream_blocks: []
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: export_exchange_data_to_bq
+  retry_config: null
+  status: executed
+  timeout: null
+  type: data_exporter
+  upstream_blocks:
+  - updated_to_timestamp_exchange
+  uuid: export_exchange_data_to_bq
+- all_upstream_blocks_executed: true
+  color: null
+  configuration:
+    file_path: data_loaders/load_assets_history_from_bucket.py
+    file_source:
+      path: data_loaders/load_assets_history_from_bucket.py
+  downstream_blocks:
+  - add_flag_for_historical_data
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: load_assets_history_from_bucket
+  retry_config: null
+  status: executed
+  timeout: null
+  type: data_loader
+  upstream_blocks: []
+  uuid: load_assets_history_from_bucket
+- all_upstream_blocks_executed: true
+  color: null
+  configuration: {}
+  downstream_blocks:
+  - transform_assets_add_timestamp_column
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: add_flag_for_historical_data
+  retry_config: null
+  status: executed
+  timeout: null
+  type: transformer
+  upstream_blocks:
+  - load_assets_history_from_bucket
+  uuid: add_flag_for_historical_data
+- all_upstream_blocks_executed: true
+  color: null
+  configuration:
+    file_path: transformers/transform_assets_add_timestamp_column.py
+    file_source:
+      path: transformers/transform_assets_add_timestamp_column.py
+  downstream_blocks:
+  - export_historical_assets_to_bq
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: transform_assets_add_timestamp_column
+  retry_config: null
+  status: executed
+  timeout: null
+  type: transformer
+  upstream_blocks:
+  - add_flag_for_historical_data
+  uuid: transform_assets_add_timestamp_column
+- all_upstream_blocks_executed: true
+  color: null
+  configuration: {}
+  downstream_blocks: []
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: export_historical_assets_to_bq
+  retry_config: null
+  status: executed
+  timeout: null
+  type: data_exporter
+  upstream_blocks:
+  - transform_assets_add_timestamp_column
+  uuid: export_historical_assets_to_bq
+- all_upstream_blocks_executed: true
+  color: null
+  configuration: {}
+  downstream_blocks:
+  - export_rates_data_to_bq
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: fill_missing_vals_for_rates
+  retry_config: null
+  status: executed
+  timeout: null
+  type: transformer
+  upstream_blocks:
+  - add_flag_for_rates
+  uuid: fill_missing_vals_for_rates
+- all_upstream_blocks_executed: true
+  color: null
+  configuration: {}
+  downstream_blocks: []
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: export_rates_data_to_bq
+  retry_config: null
+  status: executed
+  timeout: null
+  type: data_exporter
+  upstream_blocks:
+  - fill_missing_vals_for_rates
+  uuid: export_rates_data_to_bq
+- all_upstream_blocks_executed: true
+  color: null
+  configuration:
+    file_path: transformers/updated_to_timestamp_market.py
+    file_source:
+      path: transformers/updated_to_timestamp_market.py
+  downstream_blocks:
+  - export_markt_data_to_bq
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: updated_to_timestamp_market
+  retry_config: null
+  status: executed
+  timeout: null
+  type: transformer
+  upstream_blocks:
+  - add_flag_for_market
+  uuid: updated_to_timestamp_market
+- all_upstream_blocks_executed: true
+  color: null
+  configuration: {}
+  downstream_blocks: []
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: export_markt_data_to_bq
+  retry_config: null
+  status: executed
+  timeout: null
+  type: data_exporter
+  upstream_blocks:
+  - updated_to_timestamp_market
+  uuid: export_markt_data_to_bq
+- all_upstream_blocks_executed: true
+  color: null
+  configuration: {}
+  downstream_blocks:
+  - fill_missing_vals_for_rates
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: add_flag_for_rates
+  retry_config: null
+  status: executed
+  timeout: null
+  type: transformer
+  upstream_blocks:
+  - load_rates_from_bucket
+  uuid: add_flag_for_rates
+cache_block_output_in_memory: false
+callbacks: []
+concurrency_config: {}
+conditionals: []
+created_at: '2024-10-18 08:16:42.614472+00:00'
+data_integration: null
+description: null
+executor_config: {}
+executor_count: 1
+executor_type: null
+extensions: {}
+name: get_data_from_bucket_to_bigquery
+notification_config: {}
+remote_variables_dir: null
+retry_config: {}
+run_pipeline_in_one_process: false
+settings:
+  triggers: null
+spark_config: {}
+tags: []
+type: python
+uuid: get_data_from_bucket_to_bigquery
+variables_dir: /home/src/mage_data/crypto_data_ingestion
+widgets: []

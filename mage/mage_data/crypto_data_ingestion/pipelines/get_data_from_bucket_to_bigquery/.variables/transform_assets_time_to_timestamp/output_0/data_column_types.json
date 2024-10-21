@@ -1,0 +1,1 @@
+{"priceUsd": "str", "time": "int64", "circulatingSupply": "str", "date": "str", "id": "str", "timestamp": "datetime64[ns]"}
